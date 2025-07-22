@@ -3,7 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/modules/shared/services/category.service';
 import { NewCategoryComponent } from '../new-category/new-category.component';
-import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarRef,
+  SimpleSnackBar,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-category',
@@ -11,7 +15,6 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
-  
   private categoryServices = inject(CategoryService);
   public dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
@@ -35,47 +38,63 @@ export class CategoryComponent implements OnInit {
     );
   }
 
-  processCategoriesResponse(resp: any){
-
+  processCategoriesResponse(resp: any) {
     const dataCategory: CategoryElement[] = [];
 
-    if( resp.metadata[0].code = "00") {
+    if ((resp.metadata[0].code = '00')) {
       let listCategory = resp.categoryResponse.category;
 
       listCategory.forEach((element: CategoryElement) => {
         dataCategory.push(element);
       });
 
-      this.dataSource = new MatTableDataSource<CategoryElement>(dataCategory)
+      this.dataSource = new MatTableDataSource<CategoryElement>(dataCategory);
     }
   }
 
-  openCategoryDialog(){
-   
+  openCategoryDialog() {
     const dialogRef = this.dialog.open(NewCategoryComponent, {
       width: '450px',
     });
 
-    dialogRef.afterClosed().subscribe((result:any) => {
-
-      if( result == 1){
-        this.openSnackBar("Categoria agregada", "Exitosa");
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar('Categoria agregada', 'Exitosa');
         this.getCategories();
-      }else if (result == 2) {
-        this.openSnackBar("Se produjo un error", "Error") 
+      } else if (result == 2) {
+        this.openSnackBar('Se produjo un error', 'Error');
       }
-
     });
-  
   }
 
-  openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar>{
+  edit(id: number, name: string, description: string) {
+    const dialogRef = this.dialog.open(NewCategoryComponent, {
+      width: '450px',
+      data: { id: id, name: name, description: description },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar('Categoria actualizada', 'Exitosa');
+        this.getCategories();
+      } else if (result == 2) {
+        this.openSnackBar(
+          'Se produjo un error al actualizar categoria',
+          'Error'
+        );
+      }
+    });
+  }
+
+  openSnackBar(
+    message: string,
+    action: string
+  ): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {
-      duration: 2000
-    })
+      duration: 2000,
+    });
   }
 }
-
 
 export interface CategoryElement {
   description: string;

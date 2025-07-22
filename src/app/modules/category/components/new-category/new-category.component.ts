@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/modules/shared/services/category.service';
 
 @Component({
@@ -12,11 +12,15 @@ export class NewCategoryComponent implements OnInit{
 
   public categoryForm!: FormGroup;
 
+  estadoFormulario: string = "";
+
   private fb = inject(FormBuilder);
 
   private categoryService=inject(CategoryService);
 
   private dialogRef = inject(MatDialogRef<NewCategoryComponent>);
+
+  public data = inject(MAT_DIALOG_DATA);
 
   ngOnInit(): void {
 
@@ -24,6 +28,11 @@ export class NewCategoryComponent implements OnInit{
       name: ['', Validators.required],
       description: ['', Validators.required],
     })
+    this.estadoFormulario = "Agregar"
+    if (this.data != null ){
+      this.updateForm(this.data)
+      this.estadoFormulario = "Actualizar"
+    }
   }
 
   onSave(){
@@ -32,16 +41,33 @@ export class NewCategoryComponent implements OnInit{
       description: this.categoryForm.get('description')?.value
     }
 
-    this.categoryService.saveCategorie(data)
+    if(this.data != null){
+      //update
+      this.categoryService.updateCategorie(data, this.data.id).subscribe( (data:any) =>{
+        this.dialogRef.close(1);
+      }, (error:any) => {
+        this.dialogRef.close(2);
+      })
+    }else{
+          this.categoryService.saveCategorie(data)
       .subscribe( (data:any) => {
         console.log(data);
         this.dialogRef.close(1)
       },(error:any) => {
         this.dialogRef.close(2);
       })
+    }
+
   }
 
   onCancel(){
     this.dialogRef.close(3);
+  }
+
+  updateForm(data: any){
+        this.categoryForm = this.fb.group({
+      name: [data.name, Validators.required],
+      description: [data.description, Validators.required],
+    });
   }
 }
