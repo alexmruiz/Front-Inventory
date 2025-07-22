@@ -110,6 +110,16 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  buscar( termino: string ){
+    if( termino.length === 0){
+      return this.getCategories();
+    }
+
+    this.categoryServices.getCategoryById(termino).subscribe( (resp: any) => {
+      this.processCategoriesResponse(resp);
+    })
+  }
+
   openSnackBar(
     message: string,
     action: string
