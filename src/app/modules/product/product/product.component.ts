@@ -10,6 +10,7 @@ import {
 } from '@angular/material/snack-bar';
 import { NewProductComponent } from '../new-product/new-product.component';
 import { ConfirmComponent } from '../../shared/components/confirm/confirm.component';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-product',
@@ -19,11 +20,15 @@ import { ConfirmComponent } from '../../shared/components/confirm/confirm.compon
 export class ProductComponent implements OnInit {
   public dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+  private util = inject(UtilService);
+
+  isAdmin: any;
 
   constructor() {}
 
   ngOnInit(): void {
     this.getProducts();
+    this.isAdmin = this.util.isAdmin();
   }
 
   private productService = inject(ProductService);
