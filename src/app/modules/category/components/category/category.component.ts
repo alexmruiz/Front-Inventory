@@ -20,9 +20,6 @@ export class CategoryComponent implements OnInit {
   private categoryServices = inject(CategoryService);
   public dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
-  
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator
 
   ngOnInit(): void {
     this.getCategories();
@@ -30,6 +27,9 @@ export class CategoryComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'description', 'actions'];
   dataSource = new MatTableDataSource<CategoryElement>();
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
   getCategories(): void {
     this.categoryServices.getCategories().subscribe(
@@ -93,13 +93,13 @@ export class CategoryComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param id 
+   *delete category
+   * @param id
    */
-  delete(id: any){
+  delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '450px',
-      data: { id: id },
+      data: { id: id, module: "category" },
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -107,22 +107,19 @@ export class CategoryComponent implements OnInit {
         this.openSnackBar('Categoria eliminada', 'Exitosa');
         this.getCategories();
       } else if (result == 2) {
-        this.openSnackBar(
-          'Se produjo un error al eliminar categoria',
-          'Error'
-        );
+        this.openSnackBar('Se produjo un error al eliminar categoria', 'Error');
       }
     });
   }
 
-  buscar( termino: string ){
-    if( termino.length === 0){
+  buscar(termino: string) {
+    if (termino.length === 0) {
       return this.getCategories();
     }
 
-    this.categoryServices.getCategoryById(termino).subscribe( (resp: any) => {
+    this.categoryServices.getCategoryById(termino).subscribe((resp: any) => {
       this.processCategoriesResponse(resp);
-    })
+    });
   }
 
   openSnackBar(
