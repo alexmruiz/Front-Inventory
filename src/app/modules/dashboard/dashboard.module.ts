@@ -5,6 +5,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoryModule } from '../category/category.module';
 import { ProductModule } from '../product/product.module';
+import { MaterialModule } from '../shared/material.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ProductModule } from '../product/product.module';
     SharedModule,
     CategoryModule,
     ProductModule,
+    MaterialModule
   ]
 })
 export class DashboardModule { }
