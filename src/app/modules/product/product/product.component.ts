@@ -110,7 +110,13 @@ export class ProductComponent implements OnInit {
   ) {
     const dialogRef = this.dialog.open(NewProductComponent, {
       width: '450px',
-      data: {id: id, name: name, price:price, account:account, category:category}
+      data: {
+        id: id,
+        name: name,
+        price: price,
+        account: account,
+        category: category,
+      },
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 1) {
@@ -122,10 +128,10 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  delete(id: any){
+  delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '450px',
-      data: {id: id, module: "product"}
+      data: { id: id, module: 'product' },
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 1) {
@@ -137,17 +143,36 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  buscar(name: any){
-    if( name.length === 0){
+  buscar(name: any) {
+    if (name.length === 0) {
       return this.getProducts();
     }
 
-    this.productService.seachByName(name)
-    .subscribe( (resp:any) =>
-    this.processProductResponse(resp)
-  )
+    this.productService
+      .seachByName(name)
+      .subscribe((resp: any) => this.processProductResponse(resp));
   }
 
+  exportExcel() {
+
+    this.productService.exportProducts().subscribe(
+      (data: any) => {
+        let file = new Blob([data], {
+          type: 'application/vnd.openxmlformats_officedocument.spreadsheetml.sheet',
+        });
+        let fileUrl = URL.createObjectURL(file);
+        var anchor = document.createElement('a');
+        anchor.download = 'products.xlsx';
+        anchor.href = fileUrl;
+        anchor.click();
+
+        this.openSnackBar('Archivo exportado correctamente', 'Exitoso');
+      },
+      (error: any) => {
+        this.openSnackBar('No se pudo exportar el archivo', 'Error');
+      }
+    );
+  }
 }
 //Mismos campos que en el modelo spring boot
 export interface ProductElement {
