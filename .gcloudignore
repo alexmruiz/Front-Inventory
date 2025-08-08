@@ -1,0 +1,17 @@
+# Archivos de desarrollo
+e2e/
+node_modules/
+src/
+coverage/
+.angular/
+.env
+*.md
+*.json
+*.yaml
+LICENSE
+.gcloudignore
+.git/
+.gitignore
+
+# Archivos ocultos y de configuración
+.*

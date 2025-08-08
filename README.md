@@ -1,27 +1,90 @@
-# FrontInventory
+# 🧠 Sistema de Inventario Fullstack
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Aplicación web fullstack desarrollada con **Spring Boot 3** y **Angular 16**, que permite gestionar inventario, usuarios y productos. Este proyecto forma parte de mi formación como **Desarrollador Fullstack** y ha sido desarrollado aplicando buenas prácticas y metodologías ágiles.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 📑 Tabla de Contenido
 
-## Code scaffolding
+- [📌 Descripción del Proyecto](#-descripción-del-proyecto)
+- [🚀 Funcionalidades](#-funcionalidades)
+- [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+- [🖥️ Capturas de Pantalla](#-capturas-de-pantalla)
+- [📁 Repositorios del Proyecto](#-repositorios-del-proyecto)
+- [✅ Aprendizajes y Experiencia](#-aprendizajes-y-experiencia)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 📌 Descripción del Proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Este sistema permite realizar la gestión completa de productos, movimientos de stock, usuarios y reportes. Se ha implementado autenticación y autorización mediante **Keycloak**, y el frontend y backend están completamente desacoplados y comunicados vía **API REST**. Todo el proyecto fue desarrollado siguiendo la metodología **Kanban**, utilizando herramientas como **Trello**, **GitHub** y **Confluence**.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🚀 Funcionalidades
 
-## Running end-to-end tests
+### 👤 Usuario:
+- Login con Keycloak (JWT)
+- Visualización de productos
+- Exportación de reportes en Excel
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 🛠️ Administrador:
+- Gestión de productos y categorías
+- Registro de entradas/salidas de stock
+- Dashboard con estadísticas (Chart.js)
+- Gestión de usuarios y roles
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 🛠️ Tecnologías Utilizadas
+
+### Backend:
+- Java 17
+- Spring Boot 3
+- MySQL
+- Keycloak (OAuth2, JWT)
+- Docker
+- JUnit y Mockito
+- GCP (Google Cloud Platform)
+
+### Frontend:
+- Angular 16
+- Angular Material
+- TypeScript
+- Chart.js
+- HTML & CSS
+
+### DevOps y Gestión:
+- Trello + Kanban
+- Git + GitHub + Gitflow
+- Confluence
+
+---
+
+## 🖥️ Capturas de Pantalla
+
+> *(Agrega aquí tus capturas usando `![alt](ruta)`)*
+
+- ![Login con Keycloak](imgInventory/i1.png)
+- ![Dashboard](imgInventory/i2.png)
+- ![Gestión de productos](imgInventory/i3.png)
+- ![Formulario de alta](imgInventory/i6.png)
+
+---
+
+## 📁 Repositorios del Proyecto
+
+[![Ver Frontend](https://img.shields.io/badge/GitHub-Frontend-blue?logo=github)](https://github.com/alexmruiz/Front-Inventory)  
+[![Ver Backend](https://img.shields.io/badge/GitHub-Backend-green?logo=github)](https://github.com/alexmruiz/Inventory-backend)
+
+---
+
+## ✅ Aprendizajes y Experiencia
+
+- Desarrollo completo de una aplicación desacoplada (Frontend + Backend)
+- Autenticación y autorización con Keycloak y JWT
+- Creación de API RESTful con Spring Boot
+- Seguridad, pruebas y buenas prácticas de desarrollo
+- Uso de Docker para contenerización de servicios
+- Despliegue en Google Cloud Platform
+- Organización del proyecto con metodología ágil (Kanban)

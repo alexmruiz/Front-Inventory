@@ -13,11 +13,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     keycloak.init({
       config: {
         url: 'http://localhost:8082/',
+        //url: 'http://34.78.admin45.5/',
         realm: 'inventory',
         clientId: 'angular-client',
       },
       initOptions: {
-        //onLoad: 'login-required',
+        onLoad: 'login-required',
       },
       loadUserProfileAtStartUp: true,
     });

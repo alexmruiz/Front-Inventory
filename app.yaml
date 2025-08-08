@@ -1,0 +1,10 @@
+runtime: python311
+
+handlers:
+  - url: /
+    static_files: dist/front-inventory/index.html
+    upload: dist/front-inventory/index.html
+
+  - url: /
+    static_dir: dist/front-inventory
+
