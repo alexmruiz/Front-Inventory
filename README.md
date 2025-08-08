@@ -63,8 +63,6 @@ Este sistema permite realizar la gestión completa de productos, movimientos de 
 
 ## 🖥️ Capturas de Pantalla
 
-> *(Agrega aquí tus capturas usando `![alt](ruta)`)*
-
 - ![Login con Keycloak](imgInventory/i1.png)
 - ![Dashboard](imgInventory/i2.png)
 - ![Gestión de productos](imgInventory/i3.png)
